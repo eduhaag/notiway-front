@@ -24,11 +24,3 @@ export const IconContainer = styled.div`
     display: block;
   }
 `
-
-export const Input = styled.input`
-  padding-left: 2.5rem;
-  margin-left: -2rem;
-  border: 0;
-  height: 100%;
-  flex: 1;
-`

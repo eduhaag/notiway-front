@@ -16,6 +16,7 @@ export const HeaderContainer = styled.header`
     flex-direction: column-reverse;
     gap: 1rem;
     justify-content: center;
+    margin-bottom: 1rem;
   }
 `
 

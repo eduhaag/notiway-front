@@ -3,9 +3,10 @@ import { HeaderContainer, UserContainer } from './styles'
 import LogoVertical from '../../assets/logo_vertical.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../contexts/auth'
+import { NavLink } from 'react-router-dom'
 
 export function Header() {
-  const { consumer } = useContext(AuthContext)
+  const { consumer, logout } = useContext(AuthContext)
 
   const nameParsed = consumer ? consumer.name.split(' ') : undefined
 
@@ -17,14 +18,17 @@ export function Header() {
         </span>
         <div>
           <a href="#">Mudar senha</a> |
-          <a
-            href="http://api.notiway.com.br/"
+          <NavLink
+            to="http://api.notiway.com.br/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Documentação
-          </a>
-          | <a href="#">Sair</a>
+          </NavLink>
+          |{' '}
+          <NavLink to={'/login'} onClick={logout}>
+            Sair
+          </NavLink>
         </div>
       </UserContainer>
       <img src={LogoVertical} alt="" />

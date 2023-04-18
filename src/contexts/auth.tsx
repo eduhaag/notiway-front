@@ -1,5 +1,7 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import { api } from '../lib/axios'
+import { useNavigate } from 'react-router-dom'
+import { showErrorToast, showWarnToast } from '../providers/toastProvider'
 
 interface AuthContextProviderProps {
   children: ReactNode
@@ -27,9 +29,10 @@ interface AuthContextType {
   consumer: Consumer | null
   token: string | null
   isAuthenticated: boolean
+  isLoading: boolean
   login: (email: string, password: string) => void
-  refreshToken: () => void
   logout: () => void
+  refreshToken: () => void
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -37,24 +40,82 @@ export const AuthContext = createContext({} as AuthContextType)
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [consumer, setConsumer] = useState<Consumer | null>(null)
   const [token, setToken] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
-  const login = async (email: string, password: string) => {
-    const { data } = await api.post('/sessions', {
-      email,
-      password,
-    })
-    console.log(data)
+  useEffect(() => {
+    const storageInformations = localStorage.getItem('@notiway-login-data')
 
-    setToken(data.token)
-    setConsumer(data.consumer)
+    if (storageInformations) {
+      const { consumer, token } = JSON.parse(storageInformations) as {
+        consumer: Consumer
+        token: string
+      }
+
+      setConsumer(consumer)
+      setToken(token)
+      refreshToken().then((isLogged) => {
+        if (isLogged) {
+          navigate('/')
+        } else {
+          showWarnToast('Sua sessão expirou.')
+          logout()
+        }
+      })
+    } else {
+      navigate('/login')
+    }
+  }, [])
+
+  async function login(email: string, password: string) {
+    setIsLoading(true)
+    try {
+      const { data } = await api.post('/sessions', {
+        email,
+        password,
+      })
+      setToken(data.token)
+      setConsumer(data.consumer)
+
+      localStorage.setItem(
+        '@notiway-login-data',
+        JSON.stringify({ token: data.token, consumer: data.consumer }),
+      )
+      navigate('/')
+    } catch (error: any) {
+      if (error.response.status === 400) {
+        showErrorToast('E-mail e/ou senha inválidos!')
+      } else {
+        showErrorToast('Ops! Algo deu errado. Tente novamente mais tarte')
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const refreshToken = () => {
-    // implements
+  async function logout() {
+    try {
+      await api.patch('/sessions/logout').then(() => {
+        setConsumer(null)
+        setToken(null)
+        localStorage.removeItem('@notiway-login-data')
+        navigate('/login')
+      })
+    } catch (error) {
+      showWarnToast('Falha ao realizar o logout.')
+    }
   }
 
-  const logout = () => {
-    // implements
+  async function refreshToken() {
+    try {
+      const { data } = await api.patch('/token/refresh')
+
+      setToken(data.token)
+      return true
+    } catch (error: any) {
+      console.log(error)
+      return false
+    }
   }
 
   return (
@@ -64,8 +125,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         token,
         isAuthenticated: !!consumer,
         login,
-        refreshToken,
         logout,
+        isLoading,
+        refreshToken,
       }}
     >
       {children}

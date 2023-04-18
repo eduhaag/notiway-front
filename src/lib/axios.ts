@@ -1,5 +1,6 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3333/site',
+  baseURL: 'https://api.notiway.com.br/site',
+  withCredentials: true,
 })

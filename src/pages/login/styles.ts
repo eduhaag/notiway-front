@@ -19,25 +19,10 @@ export const LoginContainer = styled.form`
   }
 `
 
-export const Button = styled.button`
-  margin-top: 0.75rem;
-
-  background-color: ${({ theme }) => theme.green};
-  border-radius: 5px;
-  height: 2.5rem;
-  width: 200px;
-
-  color: ${({ theme }) => theme.white};
-  font-family: Montserrat, sans-serif;
-  font-weight: bold;
-  font-size: 1.2rem;
-
+export const Input = styled.input`
+  padding-left: 2.5rem;
+  margin-left: -2rem;
   border: 0;
-
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-    transition: opacity 0.2s;
-  }
+  height: 100%;
+  flex: 1;
 `

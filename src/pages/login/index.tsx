@@ -1,40 +1,52 @@
 import { useContext } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
-import { Button, LoginContainer } from './styles'
+import { Input, LoginContainer } from './styles'
 
 import logo from '../../assets/logo.png'
 import { TextBox } from './components/textbox'
 import { AuthContext } from '../../contexts/auth'
+import { LoadingSpinner } from '../../components/LoadingSpiner'
+import { Button } from '../../components/Button'
 
-export type LoginInputs = {
-  email: string
-  password?: string
-}
+const loginFormValidationSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+})
+
+type LoginFormData = z.infer<typeof loginFormValidationSchema>
 
 export function Login() {
-  const { login } = useContext(AuthContext)
+  const { login, isLoading } = useContext(AuthContext)
 
-  const loginForm = useForm<LoginInputs>()
-  const { handleSubmit, register } = loginForm
+  const { handleSubmit, register } = useForm<LoginFormData>({
+    resolver: zodResolver(loginFormValidationSchema),
+  })
 
-  function handleLogin(data: LoginInputs) {
-    console.log(data)
-    // login(data.email, data.password)
+  async function handleLogin({ email, password }: LoginFormData) {
+    login(email, password)
   }
 
   return (
     <LoginContainer onSubmit={handleSubmit(handleLogin)}>
       <img src={logo} alt="" />
-      <FormProvider {...loginForm}>
-        <TextBox type="email" placeholder="Seu e-mail" {...register('email')} />
-        <TextBox
+      <TextBox type="email">
+        <Input type="email" placeholder="Seu e-mail" {...register('email')} />
+      </TextBox>
+      <TextBox type="password">
+        <Input
           type="password"
-          placeholder="Sua senha"
+          placeholder="Seu e-mail"
           {...register('password')}
         />
-      </FormProvider>
-      <Button type="submit">Entrar</Button>
+      </TextBox>
+      {!isLoading ? (
+        <Button buttonProps={{ type: 'submit' }}>Entrar</Button>
+      ) : (
+        <LoadingSpinner />
+      )}
     </LoginContainer>
   )
 }

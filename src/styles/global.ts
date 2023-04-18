@@ -19,6 +19,8 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     justify-content:center;
     padding: 2rem;
+
+
   }
 
   body, input, textarea, button {
