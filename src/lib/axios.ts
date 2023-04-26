@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'https://api.notiway.com.br/site',
+  baseURL: import.meta.env.VITE_REACT_API_URL,
   withCredentials: true,
 })

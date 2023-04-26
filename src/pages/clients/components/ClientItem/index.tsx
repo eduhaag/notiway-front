@@ -6,7 +6,7 @@ import { defaultTheme } from '../../../../styles/themes/default'
 import { AuthContext } from '../../../../contexts/auth'
 import { api } from '../../../../lib/axios'
 import { Root, Trigger } from '@radix-ui/react-alert-dialog'
-import { GenerateKeyModal } from '../GenerateKeyModal'
+import { GenerateKeyModal } from '../../../../modals/GenerateKeyModal'
 
 export interface Client {
   id: string

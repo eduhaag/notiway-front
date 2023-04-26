@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client'
 
-const socket = io('https://api.notiway.com.br/')
+const socket = io(import.meta.env.VITE_REACT_SOCKET_URL)
 
 export default socket

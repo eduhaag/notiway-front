@@ -1,13 +1,13 @@
-import { Cancel, Action, Portal } from '@radix-ui/react-alert-dialog'
+import { Cancel, Action } from '@radix-ui/react-alert-dialog'
 
 import {
   AcceptButton,
   CancelButton,
-  Content,
   Description,
-  Overlay,
+  ModalContent,
   Title,
 } from './styles'
+import { Modal } from '../../components/Modal'
 
 interface ModalParams {
   generateNewKey: () => void
@@ -15,9 +15,8 @@ interface ModalParams {
 
 export function GenerateKeyModal({ generateNewKey }: ModalParams) {
   return (
-    <Portal>
-      <Overlay />
-      <Content>
+    <Modal>
+      <ModalContent>
         <Title>Gerar nova chave?</Title>
         <Description>
           Ao gerar uma nova chave, a chave anterior é invalidada, sendo
@@ -33,7 +32,7 @@ export function GenerateKeyModal({ generateNewKey }: ModalParams) {
             </AcceptButton>
           </Action>
         </div>
-      </Content>
-    </Portal>
+      </ModalContent>
+    </Modal>
   )
 }

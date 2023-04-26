@@ -34,10 +34,13 @@ export const QrContainer = styled.div`
     width: 8rem;
   }
 `
+interface ButtonProps {
+  color: 'red' | 'green'
+}
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
   padding: 0.5rem 3rem;
-  background-color: ${({ theme }) => theme.green};
+  background-color: ${({ color, theme }) => theme[color]};
   color: ${({ theme }) => theme.white};
   border: 0;
   border-radius: 5px;

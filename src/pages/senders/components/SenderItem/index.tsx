@@ -11,6 +11,8 @@ import {
   showWarnToast,
 } from '../../../../providers/toastProvider'
 import dayjs from 'dayjs'
+import { Root, Trigger } from '@radix-ui/react-alert-dialog'
+import { DisconnectSenderModal } from '../../../../modals/DisconnectSenderModal'
 
 export interface Sender {
   id: string
@@ -107,6 +109,29 @@ export function SenderItem({ sender, updateSender }: SenderItemProps) {
     setFinishTime(dayjs(new Date()).add(51, 'seconds').toDate())
   }
 
+  async function handleDisconnectSender() {
+    const tmp = sender
+
+    setIsQrLoading(true)
+    updateSender({ ...sender, paread_at: null })
+
+    try {
+      await refreshToken()
+
+      await api.patch(
+        `/senders/${sender.id}/disconnect`,
+        {},
+        { headers: { Authorization: `Bearer ${token} ` } },
+      )
+
+      showSuccessToast('Sender disconectado')
+    } catch (error) {
+      updateSender(tmp)
+    } finally {
+      setIsQrLoading(false)
+    }
+  }
+
   const senderStatus = sender.disabled_at
     ? 'bloqued'
     : sender.paread_at
@@ -131,8 +156,9 @@ export function SenderItem({ sender, updateSender }: SenderItemProps) {
           </div>
         </SenderInfo>
 
-        {senderStatus === 'offline' && (
+        {senderStatus === 'offline' ? (
           <QrContainer>
+            {}
             {qrCode ? (
               <>
                 <img src={qrCode} alt="um código QR" />
@@ -141,8 +167,21 @@ export function SenderItem({ sender, updateSender }: SenderItemProps) {
             ) : isQrLoading ? (
               <LoadingSpinner />
             ) : (
-              <Button onClick={HandleConnectClick}>Conectar</Button>
+              <Button color="green" onClick={HandleConnectClick}>
+                Conectar
+              </Button>
             )}
+          </QrContainer>
+        ) : (
+          <QrContainer>
+            <Root>
+              <Trigger asChild>
+                <Button color="red">Desconectar</Button>
+              </Trigger>
+              <DisconnectSenderModal
+                disconnectSender={handleDisconnectSender}
+              />
+            </Root>
           </QrContainer>
         )}
       </SenderContent>
