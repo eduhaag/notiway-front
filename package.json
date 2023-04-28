@@ -20,6 +20,7 @@
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
+    "remask": "^1.0.1",
     "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.9",
     "zod": "^3.21.4"

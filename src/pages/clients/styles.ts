@@ -9,7 +9,6 @@ export const ClientsContainer = styled.div`
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 1.5rem;
-    margin-left: 1.5rem;
   }
 
   ul {
@@ -29,4 +28,13 @@ export const ClientsContainer = styled.div`
     align-items: center;
     justify-content: center;
   }
+`
+
+export const EmptyClientsContainer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+
+  font-size: 1.2rem;
 `

@@ -62,8 +62,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
           logout()
         }
       })
-    } else {
-      navigate('/login')
     }
   }, [])
 

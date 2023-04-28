@@ -10,6 +10,7 @@ import { TextBox } from './components/textbox'
 import { AuthContext } from '../../contexts/auth'
 import { LoadingSpinner } from '../../components/LoadingSpiner'
 import { Button } from '../../components/Button'
+import { NavLink } from 'react-router-dom'
 
 const loginFormValidationSchema = z.object({
   email: z.string().email(),
@@ -38,12 +39,15 @@ export function Login() {
       <TextBox type="password">
         <Input
           type="password"
-          placeholder="Seu e-mail"
+          placeholder="Sua senha"
           {...register('password')}
         />
       </TextBox>
       {!isLoading ? (
-        <Button buttonProps={{ type: 'submit' }}>Entrar</Button>
+        <>
+          <Button buttonProps={{ type: 'submit' }}>Entrar</Button>
+          <NavLink to="/register">Clique aqui para uma conta criar</NavLink>
+        </>
       ) : (
         <LoadingSpinner />
       )}
