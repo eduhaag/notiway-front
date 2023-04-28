@@ -46,7 +46,7 @@ export function Login() {
       {!isLoading ? (
         <>
           <Button buttonProps={{ type: 'submit' }}>Entrar</Button>
-          <NavLink to="/register">Clique aqui para uma conta</NavLink>
+          <NavLink to="/register">Clique aqui para criar uma conta</NavLink>
         </>
       ) : (
         <LoadingSpinner />
