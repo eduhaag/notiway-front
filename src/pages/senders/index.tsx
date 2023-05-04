@@ -5,13 +5,17 @@ import { api } from '../../lib/axios'
 import { AuthContext } from '../../contexts/auth'
 import { NavLink } from 'react-router-dom'
 import { Card } from '../../components/Card'
+import { showErrorToast } from '../../providers/toastProvider'
+import { LoadingSpinner } from '../../components/LoadingSpiner'
 
 export function Senders() {
   const { refreshToken, consumer, token } = useContext(AuthContext)
   const [senders, setSenders] = useState<Sender[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     try {
+      setIsLoading(true)
       refreshToken()
       api
         .get(`/consumers/${consumer?.id}/senders`, {
@@ -19,9 +23,13 @@ export function Senders() {
         })
         .then(({ data }) => {
           setSenders(data.senders)
+          setIsLoading(false)
         })
     } catch (error) {
-      console.log(error)
+      setIsLoading(false)
+      showErrorToast(
+        'Não foi possível carregar a lista de senders. Tente novamente mais tarde.',
+      )
     }
   }, [consumer?.id])
 
@@ -40,7 +48,11 @@ export function Senders() {
   return (
     <SendersContainer>
       <h2>Meus senders</h2>
-      {senders.length > 0 ? (
+      {isLoading ? (
+        <Card>
+          <LoadingSpinner />
+        </Card>
+      ) : senders.length > 0 ? (
         <ul>
           {senders.map((sender) => (
             <li key={sender.id}>

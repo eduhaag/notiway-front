@@ -6,13 +6,18 @@ import { api } from '../../lib/axios'
 import produce from 'immer'
 import { NavLink } from 'react-router-dom'
 import { Card } from '../../components/Card'
+import { LoadingSpinner } from '../../components/LoadingSpiner'
+import { showErrorToast } from '../../providers/toastProvider'
 
 export function Clients() {
   const { consumer, token, refreshToken } = useContext(AuthContext)
   const [clients, setClients] = useState<Client[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     try {
+      setIsLoading(true)
+
       refreshToken()
       api
         .get(`/consumers/${consumer?.id}/clients`, {
@@ -20,9 +25,13 @@ export function Clients() {
         })
         .then(({ data }) => {
           setClients(data.clients)
+          setIsLoading(false)
         })
     } catch (error) {
-      console.log(error)
+      showErrorToast(
+        'Falha ao carregar lista de clients. Tente novamente mais tarde.',
+      )
+      setIsLoading(false)
     }
   }, [consumer?.id, token])
 
@@ -39,7 +48,11 @@ export function Clients() {
   return (
     <ClientsContainer>
       <h2>Meus clients</h2>
-      {clients.length > 0 ? (
+      {isLoading ? (
+        <Card>
+          <LoadingSpinner />
+        </Card>
+      ) : clients.length > 0 ? (
         <ul>
           {clients.map((client) => (
             <li key={client.id}>
