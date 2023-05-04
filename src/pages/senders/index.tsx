@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import { Sender, SenderItem } from './components/SenderItem'
-import { EmptySendersContainer, SendersContainer } from './styles'
+import { SendersContainer } from './styles'
 import { api } from '../../lib/axios'
 import { AuthContext } from '../../contexts/auth'
 import { NavLink } from 'react-router-dom'
+import { Card } from '../../components/Card'
 
 export function Senders() {
   const { refreshToken, consumer, token } = useContext(AuthContext)
@@ -48,16 +49,22 @@ export function Senders() {
           ))}
         </ul>
       ) : (
-        <EmptySendersContainer>
-          <p>Não existem senders cadastrados para este usuário no momento.</p>
+        <Card>
           <p>
-            Em caso de dúvidas entre em contato com atendimento@notiway.com.br
-            ou no Whatsapp{' '}
+            Não existem <strong>senders</strong> cadastrados para este usuário
+            no momento.
+          </p>
+          <p>
+            Em caso de dúvidas entre em contato conosco através do e-mail{' '}
+            <NavLink target="_blank" to="mailto:atendimento@notiway.com.br">
+              atendimento@notiway.com.br
+            </NavLink>{' '}
+            ou atráves do Whatsapp{' '}
             <NavLink target="_blank" to="https://wa.me/5547996788597">
-              +55(47) 9 99678-8597
+              clicando aqui.
             </NavLink>
           </p>
-        </EmptySendersContainer>
+        </Card>
       )}
     </SendersContainer>
   )

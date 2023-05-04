@@ -4,6 +4,7 @@ export const ClientsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: -2rem;
+  gap: 1rem;
 
   h2 {
     font-family: 'Montserrat', sans-serif;
@@ -12,7 +13,6 @@ export const ClientsContainer = styled.div`
   }
 
   ul {
-    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -23,18 +23,13 @@ export const ClientsContainer = styled.div`
     list-style: none;
   }
 
+  p {
+    text-align: center;
+  }
+
   @media (max-width: 860px) {
     margin-top: 0;
     align-items: center;
     justify-content: center;
   }
-`
-
-export const EmptyClientsContainer = styled.div`
-  display: flex;
-  margin-top: 1rem;
-  flex-direction: column;
-  gap: 1rem;
-
-  font-size: 1.2rem;
 `
