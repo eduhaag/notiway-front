@@ -29,7 +29,7 @@ export function Clients() {
         })
     } catch (error) {
       showErrorToast(
-        'Falha ao carregar lista de clients. Tente novamente mais tarde.',
+        'Não foi possível carregar a lista de clients. Tente novamente mais tarde.',
       )
       setIsLoading(false)
     }
