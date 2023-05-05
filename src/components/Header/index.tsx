@@ -39,7 +39,9 @@ export function Header() {
           </NavLink>
         </div>
       </UserContainer>
-      <img src={LogoVertical} alt="" />
+      <NavLink to="/">
+        <img src={LogoVertical} alt="Logo da Notiway" />
+      </NavLink>
     </HeaderContainer>
   )
 }

@@ -20,7 +20,5 @@ export const Content = styled(Dialog.Content)`
 
   transform: translate(-50%, -50%);
 
-  @media (max-width: 860px) {
-    width: calc(100vw - 1rem);
-  }
+  min-width: 300px;
 `

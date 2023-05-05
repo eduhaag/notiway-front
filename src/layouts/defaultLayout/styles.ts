@@ -4,6 +4,10 @@ export const LayoutContainer = styled.main`
   width: 70vw;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 860px) {
+    width: 90vw;
+  }
 `
 
 export const MainContainer = styled.div`

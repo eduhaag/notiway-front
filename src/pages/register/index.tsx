@@ -12,7 +12,7 @@ import Logo from '../../assets/logo_vertical.png'
 import { Button } from '../../components/Button'
 import { mask, unMask } from 'remask'
 import { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { api, zipApi } from '../../lib/axios'
 import {
   showErrorToast,
@@ -158,7 +158,9 @@ export function Register() {
     <RegisterContainer>
       <HeaderContainer>
         <h1>Novo cadastro</h1>
-        <img src={Logo} alt="" />
+        <NavLink to="/">
+          <img src={Logo} alt="Logo da notiway" />
+        </NavLink>
       </HeaderContainer>
 
       <FormContainer onSubmit={handleSubmit(handleRegister)}>

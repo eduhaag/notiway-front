@@ -9,7 +9,6 @@ export const ContentContainer = styled.div`
   background-color: ${({ theme }) => theme.white};
 
   padding: 1rem;
-  min-width: 300px;
 `
 
 export const FormContainer = styled.form`

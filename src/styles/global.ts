@@ -5,6 +5,8 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+
   }
 
   :focus {
@@ -18,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     display: flex;
     justify-content:center;
-    padding: 2rem;
+    padding: 1rem;
   }
 
   body, input, textarea, button {

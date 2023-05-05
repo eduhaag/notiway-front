@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const RegisterContainer = styled.section`
   margin-top: 1rem;
   padding: 1.125rem 0.875rem;
+  max-width: 50rem;
   background-color: ${({ theme }) => theme.white};
   display: flex;
   flex-direction: column;
@@ -18,23 +19,30 @@ export const RegisterContainer = styled.section`
 
 export const HeaderContainer = styled.header`
   display: flex;
-  flex-direction: row;
   width: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   img {
     max-width: 15rem;
   }
+
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 `
 
 export const FormContainer = styled.form`
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -42,7 +50,7 @@ export const FormContainer = styled.form`
 
   div {
     display: flex;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   h2 {
@@ -53,6 +61,10 @@ export const FormContainer = styled.form`
   .line-group {
     flex-direction: row;
     gap: 1rem;
+
+    @media (max-width: 700px) {
+      flex-direction: column;
+    }
   }
 
   .input-group {
@@ -93,8 +105,14 @@ export const FormContainer = styled.form`
   .check-group {
     margin-top: 1rem;
     gap: 0.5rem;
+    display: flex;
+
     align-items: center;
     justify-content: center;
+
+    input {
+      width: 5%;
+    }
   }
 
   .action-group {
