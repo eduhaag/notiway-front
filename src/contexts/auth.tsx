@@ -83,6 +83,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     } catch (error: any) {
       if (error.response.status === 400) {
         showErrorToast('E-mail e/ou senha inválidos!')
+      } else if (error.response.status === 401) {
+        navigate(`/mail-not-verified/${email}`)
       } else {
         showErrorToast('Ops! Algo deu errado. Tente novamente mais tarte')
       }

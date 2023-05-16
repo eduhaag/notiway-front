@@ -10,6 +10,7 @@ import { SignUpConfirmation } from './pages/sign-up-confirmation'
 import { MailVerify } from './pages/mail-verify'
 import { ForgotPassword } from './pages/forgotPassword'
 import { ResetPassword } from './pages/reset-password'
+import { EmailNotVerified } from './pages/mail-not-verified'
 
 export function AppRouter() {
   return (
@@ -20,6 +21,7 @@ export function AppRouter() {
       <Route path="/reset/:token" element={<ResetPassword />} />
       <Route path="/signup/confirmation" element={<SignUpConfirmation />} />
       <Route path="/verify/:mailToken" element={<MailVerify />} />
+      <Route path="/mail-not-verified/:mail" element={<EmailNotVerified />} />
       <Route
         path="/"
         element={
