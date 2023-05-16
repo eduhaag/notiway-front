@@ -3,7 +3,7 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { Input, LoginContainer } from './styles'
+import { Input, SignInContainer } from './styles'
 
 import logo from '../../assets/logo.png'
 import { TextBox } from './components/textbox'
@@ -12,26 +12,26 @@ import { LoadingSpinner } from '../../components/LoadingSpiner'
 import { Button } from '../../components/Button'
 import { NavLink } from 'react-router-dom'
 
-const loginFormValidationSchema = z.object({
+const signInFormValidationSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 })
 
-type LoginFormData = z.infer<typeof loginFormValidationSchema>
+type SignInFormData = z.infer<typeof signInFormValidationSchema>
 
-export function Login() {
+export function SignIn() {
   const { login, isLoading } = useContext(AuthContext)
 
-  const { handleSubmit, register } = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormValidationSchema),
+  const { handleSubmit, register } = useForm<SignInFormData>({
+    resolver: zodResolver(signInFormValidationSchema),
   })
 
-  async function handleLogin({ email, password }: LoginFormData) {
+  async function handleLogin({ email, password }: SignInFormData) {
     login(email, password)
   }
 
   return (
-    <LoginContainer onSubmit={handleSubmit(handleLogin)}>
+    <SignInContainer onSubmit={handleSubmit(handleLogin)}>
       <img src={logo} alt="" />
       <TextBox type="email">
         <Input type="email" placeholder="Seu e-mail" {...register('email')} />
@@ -46,11 +46,14 @@ export function Login() {
       {!isLoading ? (
         <>
           <Button buttonProps={{ type: 'submit' }}>Entrar</Button>
-          <NavLink to="/register">Clique aqui para criar uma conta</NavLink>
+          <div className="acc-actions">
+            <NavLink to="/forgot">Esqueci minha senha</NavLink>
+            <NavLink to="/signup">Não tenho conta</NavLink>
+          </div>
         </>
       ) : (
         <LoadingSpinner />
       )}
-    </LoginContainer>
+    </SignInContainer>
   )
 }

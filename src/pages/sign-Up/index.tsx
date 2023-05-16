@@ -6,7 +6,7 @@ import {
   CustomInput,
   FormContainer,
   HeaderContainer,
-  RegisterContainer,
+  SignUpContainer,
 } from './styles'
 import Logo from '../../assets/logo_vertical.png'
 import { Button } from '../../components/Button'
@@ -22,7 +22,7 @@ import {
 import { Root, Trigger } from '@radix-ui/react-alert-dialog'
 import { PrivacityTermsModal } from '../../modals/PrivacityTermsModal'
 
-const registerFormValidationSchema = z
+const signUpFormValidationSchema = z
   .object({
     name: z.string().nonempty({ message: 'Este campo é obrigatório' }),
     email: z
@@ -48,9 +48,9 @@ const registerFormValidationSchema = z
     path: ['passwordConfirm'],
   })
 
-type RegisterFormData = z.infer<typeof registerFormValidationSchema>
+type SignUpFormData = z.infer<typeof signUpFormValidationSchema>
 
-export function Register() {
+export function SignUp() {
   const [taxValue, setTaxValue] = useState('')
   const [phoneValue, setPhoneValue] = useState('')
   const [whatsappValue, setWhatsappValue] = useState('')
@@ -65,8 +65,8 @@ export function Register() {
     setValue,
     setFocus,
     setError,
-  } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerFormValidationSchema),
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpFormValidationSchema),
   })
 
   const { errors } = formState
@@ -119,7 +119,7 @@ export function Register() {
     } catch (error) {}
   }
 
-  async function handleRegister(data: RegisterFormData) {
+  async function handleRegister(data: SignUpFormData) {
     const consumer = {
       ...data,
       tax_id: data.tax,
@@ -132,7 +132,7 @@ export function Register() {
     try {
       await api.post('/consumers', { ...consumer })
       reset()
-      navigate('/')
+      navigate('/signup/confirmation')
       showSuccessToast('Cadastro realizado com sucesso.')
     } catch (error: any) {
       console.log(error)
@@ -155,7 +155,7 @@ export function Register() {
   }
 
   return (
-    <RegisterContainer>
+    <SignUpContainer>
       <HeaderContainer>
         <h1>Novo cadastro</h1>
         <NavLink to="/">
@@ -351,6 +351,6 @@ export function Register() {
           <Button buttonProps={{ onClick: handleCancelClick }}>Cancelar</Button>
         </div>
       </FormContainer>
-    </RegisterContainer>
+    </SignUpContainer>
   )
 }

@@ -34,7 +34,7 @@ export function Header() {
             Documentação
           </NavLink>
           |{' '}
-          <NavLink to={'/login'} onClick={logout}>
+          <NavLink to={'/signin'} onClick={logout}>
             Sair
           </NavLink>
         </div>

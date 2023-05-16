@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
+  z-index: 888;
   width: 100vw;
   height: 100vh;
   inset: 0;
@@ -11,6 +12,7 @@ export const Overlay = styled(Dialog.Overlay)`
 
 export const Content = styled(Dialog.Content)`
   border-radius: 6px;
+  z-index: 999;
   padding: 1rem;
   background: ${({ theme }) => theme.white};
 

@@ -97,7 +97,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         setConsumer(null)
         setToken(null)
         localStorage.removeItem('@notiway-login-data')
-        navigate('/login')
+        navigate('/signin')
       })
     } catch (error) {
       showWarnToast('Falha ao realizar o logout.')

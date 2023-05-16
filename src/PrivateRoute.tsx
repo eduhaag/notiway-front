@@ -10,7 +10,7 @@ export function Private({ children, ...rest }: PrivateProps) {
   const { isAuthenticated } = useContext(AuthContext)
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/signin" replace />
   }
 
   return children

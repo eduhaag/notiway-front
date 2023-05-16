@@ -20,4 +20,9 @@ export const ButtonContainer = styled.button`
     opacity: 0.8;
     transition: opacity 0.2s;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
 `

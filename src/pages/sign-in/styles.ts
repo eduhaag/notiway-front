@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const LoginContainer = styled.form`
+export const SignInContainer = styled.form`
   margin-top: 3rem;
   padding: 1.125rem 0.875rem;
   background-color: ${({ theme }) => theme.white};
@@ -16,6 +16,13 @@ export const LoginContainer = styled.form`
 
   img {
     width: 200px;
+  }
+
+  .acc-actions {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    line-height: 1.8;
   }
 `
 

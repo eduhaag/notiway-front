@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RegisterContainer = styled.section`
+export const SignUpContainer = styled.section`
   margin-top: 1rem;
   padding: 1.125rem 0.875rem;
   max-width: 50rem;
