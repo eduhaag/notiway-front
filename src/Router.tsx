@@ -10,6 +10,8 @@ import { ForgotPassword } from './pages/forgotPassword'
 import { ResetPassword } from './pages/reset-password'
 import { EmailNotVerified } from './pages/mail-not-verified'
 import { Home } from './pages/home'
+import { Documentation } from './pages/documentations'
+import { Terms } from './pages/terms'
 
 export function AppRouter() {
   return (
@@ -31,7 +33,16 @@ export function AppRouter() {
       >
         <Route path="/" element={<Home />} />
         <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/api/terms" element={<Terms />} />
       </Route>
+      <Route
+        path="/api/docs"
+        element={
+          <Private>
+            <Documentation />
+          </Private>
+        }
+      ></Route>
     </Routes>
   )
 }

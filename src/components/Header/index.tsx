@@ -19,6 +19,18 @@ export function Header() {
           Olá <strong>{nameParsed && nameParsed[0]}</strong>, seja bem vindo(a)
         </span>
         <div>
+          <NavLink to="/" rel="noopener noreferrer">
+            Meus clients
+          </NavLink>
+          |
+          <NavLink to="/api/docs" rel="noopener noreferrer">
+            Documentação
+          </NavLink>
+          |
+          <NavLink to="/api/terms" rel="noopener noreferrer">
+            Termos
+          </NavLink>
+          |{' '}
           <Root>
             <Trigger asChild>
               <NavLink to="">Mudar senha</NavLink>
@@ -26,14 +38,6 @@ export function Header() {
             <ChangePasswordModal />
           </Root>{' '}
           |
-          <NavLink
-            to="http://api.notiway.com.br/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentação
-          </NavLink>
-          |{' '}
           <NavLink to={'/signin'} onClick={logout}>
             Sair
           </NavLink>
