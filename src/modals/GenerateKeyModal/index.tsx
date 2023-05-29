@@ -10,7 +10,7 @@ import {
 import { Modal } from '../../components/Modal'
 
 interface ModalParams {
-  generateNewKey: () => void
+  generateNewKey: () => Promise<void>
 }
 
 export function GenerateKeyModal({ generateNewKey }: ModalParams) {

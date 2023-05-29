@@ -2,18 +2,14 @@ import { ReactNode, useState } from 'react'
 import { SectionContainer, SectionContent, SectionHeader } from './styles'
 import { CaretDown, CaretUp } from 'phosphor-react'
 
-const STATUS_TYPES = {
-  ready: {
-    title: 'Ativo',
-    color: 'green',
-  },
-  processing: {
-    title: 'Processamento',
-    color: 'yellow',
-  },
+export const STATUS_TYPES = {
   bloqued: {
     title: 'Bloqueado',
     color: 'red',
+  },
+  processing: {
+    title: 'Processando',
+    color: 'yellow',
   },
   online: {
     title: 'online',
@@ -27,11 +23,15 @@ const STATUS_TYPES = {
 
 interface ToggleSectionProps {
   title: string
-  status: keyof typeof STATUS_TYPES
+  status?: keyof typeof STATUS_TYPES
   children: ReactNode
 }
 
-export function ToggleSection({ children, title, status }: ToggleSectionProps) {
+export function ToggleSection({
+  children,
+  title,
+  status = 'processing',
+}: ToggleSectionProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   function handleSectionClick() {

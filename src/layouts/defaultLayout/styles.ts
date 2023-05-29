@@ -12,12 +12,9 @@ export const LayoutContainer = styled.main`
 
 export const MainContainer = styled.div`
   margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 10rem 1fr;
   gap: 3rem;
 
   @media (max-width: 860px) {
-    grid-template-columns: 1fr;
     margin-top: 0;
   }
 `
